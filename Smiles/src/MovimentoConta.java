@@ -4,7 +4,7 @@ public class MovimentoConta {
 	ContaMilhagem contaMilhagemdeOrigem, contaMilhagemdeDestino;
 	int valorTransacao, tipodaTransacao;
 	String nomedaFonte;
-	Date d;
+	Date date;
 
 	public String getNomeExtrato() {
 		String nomeT = this.contaMilhagemdeOrigem.cliente.nome;
@@ -22,19 +22,28 @@ public class MovimentoConta {
 					.substring(nomeT.lastIndexOf(' '), nomeT.length())
 					.toUpperCase();
 		}
-		String nomeA = null;
+		String nome = null;
 		switch (contaMilhagemdeOrigem.cliente.sexo) {
 		case 0:
-			nomeA = ultimoNome + ',' + primeiroNome + " MR.";
+			nome = ultimoNome + ',' + primeiroNome + " MR.";
 			break;
 		case 1:
-			nomeA = ultimoNome + ',' + primeiroNome + " MRS.";
+			nome = ultimoNome + ',' + primeiroNome + " MRS.";
 			break;
 		default:
 			return null;
 		}
-		return nomeA;
+		return nome;
 
+	}
+
+	public String toString() {
+		String res = "\n" + "Conta de origem: " + this.contaMilhagemdeOrigem
+				+ " \n" + "Nome da fonte: " + this.nomedaFonte + " \n"
+				+ "Valor: " + this.valorTransacao + " \n"
+				+ "Conta de destino: " + this.contaMilhagemdeDestino + " \n"
+				+ "Data: " + this.date;
+		return res;
 	}
 
 	public MovimentoConta(ContaMilhagem origem, int valor,
@@ -43,6 +52,6 @@ public class MovimentoConta {
 		this.valorTransacao = valor;
 		this.contaMilhagemdeDestino = destino;
 		this.nomedaFonte = nomedaFonte;
-		this.d = date;
+		this.date = date;
 	}
 }

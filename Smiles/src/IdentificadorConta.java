@@ -17,6 +17,11 @@ public class IdentificadorConta {
 			return false;
 		}
 	}
+	
+	public String toString(){
+		String n = "Identificador: "+ this.numero;
+		return n;
+	}
 	public IdentificadorConta(long numero) {
 		this.numero = numero;
 	}

@@ -8,17 +8,14 @@ public class Cpf {
 	public Cpf(int numero, int digito) {
 		this.setNumero(numero);
 		this.setDigito(digito);
-		// if (this.verificaCPF() == false)
-		// System.err.println("CPF invalido!");
 	}
-
-	/*private boolean verificaCPF() {
-		// TODO Auto-generated method stub
-		return false;
-	}*/
 
 	public Cpf(String cpf) {
 		// TODO - implementar a convers�o da String para numero e digito
+		int numero = Integer.parseInt(cpf.substring(0, 9));
+		int dig = Integer.parseInt(cpf.substring(9, 11));
+		this.setNumero(numero);
+		this.setDigito(dig);
 	}
 
 	public int getNumero() {
@@ -45,8 +42,15 @@ public class Cpf {
 		}
 	}
 
-	public String getCpf() {
+	/*public String getCpf() {
 		String resultado = String.format("%09d-%02d", numero, digito);
+		return resultado;
+	}*/
+	
+	public String getCpf(){
+		String n1 = Integer.toString(this.numero);
+		String n2 = Integer.toString(this.digito);
+		String resultado = n1 + n2;
 		return resultado;
 	}
 

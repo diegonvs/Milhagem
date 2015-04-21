@@ -15,6 +15,18 @@ public class TesteContaMilhagem {
 		System.out.println(cm1.saldo);
 		cm2.Creditar(20);
 		System.out.println(cm2.saldo);
+		// /////////////////////////////////////////////////////////////////////////
+		cm1.Debitar(5);
+		System.out.println(cm1.saldo);
+		cm2.Debitar(5);
+		System.out.println(cm2.saldo);
+		// /////////////////////////////////////////////////////////////////////////
+		cm1.Transferir(1, cm2);
+		System.out.println(cm1.saldo);
+		System.out.println(cm2.saldo);
+		// //////////////////////////////////////////////////////////////////////////
+		System.out.println(cm1.ativa);
+		System.out.println(cm2.ativa);
 
 	}
 
