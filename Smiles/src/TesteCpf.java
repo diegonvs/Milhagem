@@ -10,6 +10,11 @@ public class TesteCpf {
 		System.out.println("Construtor Sobrecarregado de inteiros: ");
 		System.out.println(c2.getNumero());
 		System.out.println(c2.getDigito());
+		System.out.println("Métodos toString() e getCpf(): ");
+		System.out.println(c1.toString());
+		System.out.println(c2.toString());
+		System.out.println(c1.getCpf());
+		System.out.println(c2.getCpf());
 
 	}
 

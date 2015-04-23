@@ -6,12 +6,13 @@ public class Cpf {
 	private int digito;
 
 	public Cpf(int numero, int digito) {
+		//Construtor que recebe dois inteiros
 		this.setNumero(numero);
 		this.setDigito(digito);
 	}
 
 	public Cpf(String cpf) {
-		// TODO - implementar a convers�o da String para numero e digito
+		//Construtor sobrescrito que recebe uma String
 		int numero = Integer.parseInt(cpf.substring(0, 9));
 		int dig = Integer.parseInt(cpf.substring(9, 11));
 		this.setNumero(numero);
@@ -41,11 +42,6 @@ public class Cpf {
 			System.err.println("Digito do cpf invalido!");
 		}
 	}
-
-	/*public String getCpf() {
-		String resultado = String.format("%09d-%02d", numero, digito);
-		return resultado;
-	}*/
 	
 	public String getCpf(){
 		String n1 = Integer.toString(this.numero);

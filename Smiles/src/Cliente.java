@@ -6,8 +6,8 @@ public class Cliente extends Cpf {
 
 	// Método para converter para string os valores atribuidos a nome e a cpf da classe
 	public String toString() {
-		String r = "Nome: " + this.nome + "\n";
-		r = r + "CPF: " + this.cpf + "\n";
+		String r = "Nome: " + this.nome + "\n" + "Idade: " + this.idade + "\n" + "Renda: " + this.renda
+				+ "\n";
 		return r;
 	}
 

@@ -38,7 +38,7 @@ public class RepositorioContaMilhagem {
 	public boolean excluir(ContaMilhagem cm) {
 		boolean r = false;
 		for (int i = 0; i < quantidade; i++) {
-			if (elementos[i].identificadorconta.equals(cm.identificadorconta)) {
+			if (elementos[i].identificadorconta.numero == (cm.identificadorconta.numero)) {
 				elementos[i] = null;
 				elementos[i] = elementos[--quantidade];
 				elementos[quantidade] = null;
