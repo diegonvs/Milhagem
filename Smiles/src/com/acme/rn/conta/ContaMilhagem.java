@@ -23,8 +23,8 @@ public class ContaMilhagem {
 	}
 
 	public void Transferir(int valor, ContaMilhagem c) {
-		this.Debitar(valor);
 		c.Creditar(valor);
+		this.Debitar(valor);
 	}
 
 	public void Desativar() {

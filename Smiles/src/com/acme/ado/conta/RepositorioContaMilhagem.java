@@ -13,7 +13,7 @@ public class RepositorioContaMilhagem {
 	public ContaMilhagem buscar(IdentificadorConta c1) {
 		ContaMilhagem cm = null;
 		for (int i = 0; i < quantidade; i++) {
-			if (elementos[i].identificadorconta.equals(c1.getNumero())) {
+			if (elementos[i].identificadorconta.getNumero() == (c1.getNumero())) {
 				cm = elementos[i];
 				break;
 			}
