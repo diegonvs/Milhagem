@@ -24,9 +24,9 @@ public class TesteRepositorioMovimentoConta {
 		RepositorioMovimentoConta rmc1 = new RepositorioMovimentoConta();
 		// //////////////////////////////////////////////////////////////////////////////
 		MovimentoConta mc1 = new MovimentoConta(cm1, 200, cm2,
-				cm1.cliente.nome, new Date());
+				cm1.cliente.getNome(), new Date());
 		MovimentoConta mc2 = new MovimentoConta(cm2, 200, cm1,
-				cm2.cliente.nome, new Date());
+				cm2.cliente.getNome(), new Date());
 		// Incluindo os movimentos conta mc1 e mc2
 		rmc1.incluir(mc1);
 		rmc1.incluir(mc2);

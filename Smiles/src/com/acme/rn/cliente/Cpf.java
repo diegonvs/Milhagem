@@ -51,9 +51,9 @@ public class Cpf {
 		return resultado;
 	}
 
-	public boolean equals(Cpf cpf) {
+	/*public boolean equals(Cpf cpf) {
 		return this.numero == cpf.numero && this.digito == cpf.digito;
-	}
+	}*/
 
 	public String toString() {
 		return "CPF: " + this.getCpf();

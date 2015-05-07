@@ -20,8 +20,8 @@ public class TesteMovimentoConta {
 		MovimentoConta mc2 = new MovimentoConta(cm2, 200, cm1, "Teste",
 				new Date());
 		///////////////////////////////////////////////////////////////////////////
-		System.out.println(cm1.saldo);
-		System.out.println(cm2.saldo);
+		System.out.println(cm1.getSaldo());
+		System.out.println(cm2.getSaldo());
 		System.out.println(mc1.getNomeExtrato());
 		System.out.println(mc2.getNomeExtrato());
 		System.out.println(mc1.date);

@@ -1,6 +1,9 @@
 package com.acme.rn.conta;
+
+import java.util.Scanner;
+
 public class IdentificadorConta {
-	public long numero;
+	private long numero;
 
 	public int calcularDigitoVerificador(long numero) {
 		int soma = 0;
@@ -9,6 +12,14 @@ public class IdentificadorConta {
 			soma = soma + numeroS.charAt(i) - 48;
 		}
 		return soma % 99;
+	}
+
+	public long getNumero() {
+		return numero;
+	}
+
+	public void setNumero(long numero) {
+		this.numero = numero;
 	}
 
 	public boolean verificarValidadeDigito(int num) {
@@ -22,6 +33,13 @@ public class IdentificadorConta {
 	public String toString(){
 		String n = "Identificador: "+ this.numero;
 		return n;
+	}
+	public static IdentificadorConta criarObjeto(Scanner s) {
+		long n;
+		System.out.print("Informe o número identificador da conta: ");
+		n = s.nextLong();
+		IdentificadorConta ic = new IdentificadorConta(n);
+		return ic;
 	}
 	public IdentificadorConta(long numero) {
 		this.numero = numero;

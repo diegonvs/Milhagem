@@ -3,12 +3,13 @@ import java.util.*;
 
 public class MovimentoConta {
 	ContaMilhagem contaMilhagemdeOrigem, contaMilhagemdeDestino;
-	int valorTransacao, tipodaTransacao;
-	public String nomedaFonte;
+	private int valorTransacao, tipodaTransacao;
+	private String nomedaFonte;
 	public Date date;
+	public static int TIPO_CREDITO=1,TIPO_DEBITO=2,TIPO_TRANSFERENCIA=3;
 
 	public String getNomeExtrato() {
-		String nomeT = this.contaMilhagemdeOrigem.cliente.nome;
+		String nomeT = this.contaMilhagemdeOrigem.cliente.getNome();
 		String primeiroNome;
 		String ultimoNome;
 		if (nomeT.indexOf(' ') != -1) {
@@ -24,7 +25,7 @@ public class MovimentoConta {
 					.toUpperCase();
 		}
 		String nome = null;
-		switch (contaMilhagemdeOrigem.cliente.sexo) {
+		switch (contaMilhagemdeOrigem.cliente.getSexo()) {
 		case 0:
 			nome = ultimoNome + ',' + primeiroNome + " MR.";
 			break;
@@ -40,8 +41,8 @@ public class MovimentoConta {
 
 	public String toString() {
 		String res = "\n" + "Conta de origem: " + this.contaMilhagemdeOrigem
-				+ " \n" + "Nome da fonte: " + this.nomedaFonte + " \n"
-				+ "Valor: " + this.valorTransacao + " \n"
+				+ " \n" + "Nome da fonte: " + this.getNomedaFonte() + " \n"
+				+ "Valor: " + this.getValorTransacao() + " \n"
 				+ "Conta de destino: " + this.contaMilhagemdeDestino + " \n"
 				+ "Data: " + this.date;
 		return res;
@@ -50,9 +51,33 @@ public class MovimentoConta {
 	public MovimentoConta(ContaMilhagem origem, int valor,
 			ContaMilhagem destino, String nomedaFonte, Date date) {
 		this.contaMilhagemdeOrigem = origem;
-		this.valorTransacao = valor;
+		this.setValorTransacao(valor);
 		this.contaMilhagemdeDestino = destino;
-		this.nomedaFonte = nomedaFonte;
+		this.setNomedaFonte(nomedaFonte);
 		this.date = date;
+	}
+
+	public int getValorTransacao() {
+		return valorTransacao;
+	}
+
+	public void setValorTransacao(int valorTransacao) {
+		this.valorTransacao = valorTransacao;
+	}
+
+	public int getTipodaTransacao() {
+		return tipodaTransacao;
+	}
+
+	public void setTipodaTransacao(int tipodaTransacao) {
+		this.tipodaTransacao = tipodaTransacao;
+	}
+
+	public String getNomedaFonte() {
+		return nomedaFonte;
+	}
+
+	public void setNomedaFonte(String nomedaFonte) {
+		this.nomedaFonte = nomedaFonte;
 	}
 }

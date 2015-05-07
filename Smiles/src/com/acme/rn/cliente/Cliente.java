@@ -1,10 +1,15 @@
 package com.acme.rn.cliente;
+
+import java.util.Scanner;
+
 public class Cliente extends Cpf {
 	Cpf cpf;
-	public String nome;
-	int idade; // 0 para masculino e 1 para feminino
-	public int sexo;
-	double renda;
+	private String nome;
+	private int idade;
+	private int sexo;
+	public static final int SEXO_MASC = 0;
+	public static final int SEXO_FEM = 1;
+	private double renda;
 
 	// Método para converter para string os valores atribuidos a nome e a cpf da classe
 	public String toString() {
@@ -30,6 +35,38 @@ public class Cliente extends Cpf {
 		return primeiroNome;
 	}
 
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public int getIdade() {
+		return idade;
+	}
+
+	public void setIdade(int idade) {
+		this.idade = idade;
+	}
+
+	public int getSexo() {
+		return sexo;
+	}
+
+	public void setSexo(int sexo) {
+		this.sexo = sexo;
+	}
+
+	public double getRenda() {
+		return renda;
+	}
+
+	public void setRenda(double renda) {
+		this.renda = renda;
+	}
+
 	// Método que retorna o primeiro nome do atributo nome da classe
 	public String getUltimoNome() {
 		String nome = this.nome;
@@ -43,23 +80,40 @@ public class Cliente extends Cpf {
 		}
 		return ultimoNome;
 	}
-
+	
+	public static Cliente criarObjeto(Scanner s) {
+		String nome;
+		int idade,sexo;
+		double renda;
+		System.out.println("Informe o nome do cliente: ");
+		nome = s.nextLine();
+		System.out.println("Informe a idade do cliente: ");
+		idade = s.nextInt();
+		System.out.println("Informe a renda do cliente: ");
+		renda = s.nextDouble();
+		System.out.println("Informe o sexo do cliente[0 para Masculino,1 para Feminino]: ");
+		sexo = s.nextInt();
+		Cpf cpf = Cpf.criarObjeto(s);
+		Cliente c = new Cliente(cpf.toString(), nome, idade,renda,sexo);
+		return c;
+	}
+	
 	// Construtor com atributo cpf do tipo inteiro
 	public Cliente(int numero, int dig, String nome, int idade, double renda,
 			int sexo) {
 		super(numero, dig);
-		this.nome = nome;
-		this.idade = idade;
-		this.renda = renda;
-		this.sexo = sexo;
+		this.setNome(nome);
+		this.setIdade(idade);
+		this.setRenda(renda);
+		this.setSexo(sexo);
 	}
 
 	// Construtor com atributo cpf do tipo string
 	public Cliente(String cpf, String nome, int idade, double renda, int sexo) {
 		super(cpf);
-		this.nome = nome;
-		this.idade = idade;
-		this.renda = renda;
-		this.sexo = sexo;
+		this.setNome(nome);
+		this.setIdade(idade);
+		this.setRenda(renda);
+		this.setSexo(sexo);
 	}
 }

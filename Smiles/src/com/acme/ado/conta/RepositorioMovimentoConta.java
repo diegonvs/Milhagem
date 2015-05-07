@@ -9,7 +9,7 @@ public class RepositorioMovimentoConta {
 	public MovimentoConta buscar(String nome) {
 		MovimentoConta cm = null;
 		for (int i = 0; i < qtd; i++) {
-			if (repositorio[i].nomedaFonte.equals(nome)) {
+			if (repositorio[i].getNomedaFonte().equals(nome)) {
 				cm = repositorio[i];
 				break;
 			}
@@ -19,7 +19,7 @@ public class RepositorioMovimentoConta {
 
 	public void incluir(MovimentoConta mc1) {
 		if (qtd < this.repositorio.length) {
-			if (this.buscar(mc1.nomedaFonte) == null) {
+			if (this.buscar(mc1.getNomedaFonte()) == null) {
 				this.repositorio[qtd++] = mc1;
 			} else {
 				System.out.println("Elemento já existente no repositório!");
