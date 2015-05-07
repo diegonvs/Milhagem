@@ -4,7 +4,9 @@ import java.util.Date;
 
 import com.acme.ado.cliente.RepositorioClientes;
 import com.acme.ado.conta.RepositorioContaMilhagem;
+import com.acme.ado.conta.RepositorioMovimentoConta;
 import com.acme.rn.cliente.Cliente;
+import com.acme.rn.cliente.ControladorCliente;
 import com.acme.rn.cliente.Cpf;
 
 public class ControladorContaMilhagem extends ContaMilhagem {
@@ -16,14 +18,16 @@ public class ControladorContaMilhagem extends ContaMilhagem {
 		// TODO Auto-generated constructor stub
 	}
 
+	public static ControladorCliente controladorCliente;
 	public static RepositorioContaMilhagem rcm;
 	public static RepositorioClientes rc;
+	public static RepositorioMovimentoConta rmc;
 
 	public void Inserir(Cpf c) {
 		if (c.equals(null)) {
 			System.out.println("Cpf Nulo!");
 		} else {
-			if (rcm.buscarpeloCpf(c).equals(null)) {
+			if (rcm.buscarpeloCpf(c.getCpf()).equals(null)) {
 				System.out.println("Cpf Não Encontrado !");
 			} else {
 				// Deveria retornar um cliente.
@@ -31,11 +35,7 @@ public class ControladorContaMilhagem extends ContaMilhagem {
 						.getCpf()));
 				ContaMilhagem cm = new ContaMilhagem(ic, rc.buscar(c.getCpf()));
 				rcm.incluir(cm);
-				/*
-				 * TODO- Altere o método inserir do controlador de clientes de
-				 * forma que ele use o controlador de contas para inserir uma
-				 * nova conta, em vez dele mesmo fazer isto. NAO SAQUEI HALPPLX
-				 */
+				controladorCliente.Incluir(rc.buscar(c.getCpf()));
 
 			}
 		}
@@ -47,7 +47,9 @@ public class ControladorContaMilhagem extends ContaMilhagem {
 			System.out.println("Identificador nulo!");
 		} else {
 			// TODO - PRECISO DO ALTERAR!
-			// rcm.alterar((rcm.buscar(ic)).Creditar(valor));
+			ContaMilhagem cmi = rcm.buscar(ic);
+			ContaMilhagem cm2 = new ContaMilhagem(ic, cmi.cliente);
+			rcm.alterar(cmi.identificadorconta, cm2);
 
 		}
 	}
@@ -56,14 +58,13 @@ public class ControladorContaMilhagem extends ContaMilhagem {
 		if (ic.equals(null)) {
 			System.out.println("Identificador NULO! :-/ ");
 		} else {
-			ContaMilhagem cm;
-			rcm.buscar(ic).Debitar(valor);
-			// TODO- Comé que vou atualizar a conta no repositório mesmo? :p
-			/*
-			 * TODO- e depois incluir um movimento de débito instanciando um
-			 * novo objeto do tipo MovimentoConta e passando o mesmo para o
-			 * controlador de movimento de contas.
-			 */
+			ContaMilhagem cm2 = rcm.buscar(ic);
+			cm2.Debitar(valor);
+			rcm.alterar(ic, cm2);
+			MovimentoConta mc = new MovimentoConta(cm2, valor, new Date());
+			rmc.incluir(mc);
+
+			//Instanciar MovimentoDébito!
 
 		}
 	}

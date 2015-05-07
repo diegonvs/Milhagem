@@ -39,11 +39,10 @@ public class TesteRepositorioContaMilhagem {
 		System.out.println(rcm1.excluir(cm3));
 		System.out.println(rcm1.buscar(ic3));//foi removida na :32
 		////////////////////////////////////////////////////////////////////////////////
-		rcm1.alterar(cm2);
-		rcm1.alterar(cm4); // não vai ser alterada porque não está no repositório.
 		////////////////////////////////////////////////////////////////////////////////
+		System.out.println(rcm1.buscar(ic1).toString());
 		rcm1.listar();
-		
+		System.out.println(rcm1.buscarpeloCpf(c1.getCpf()));
 	}
 
 }

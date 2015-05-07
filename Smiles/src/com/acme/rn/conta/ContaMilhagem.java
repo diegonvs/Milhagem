@@ -36,7 +36,7 @@ public class ContaMilhagem {
 	}
 
 	public String toString() {
-		String s = this.identificadorconta.toString();
+		String s = this.identificadorconta.toString() + "\n" + this.cliente.toString();
 		return s;
 	}
 

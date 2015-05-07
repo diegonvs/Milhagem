@@ -1,4 +1,5 @@
 package com.acme.rn.conta;
+
 import java.util.*;
 
 public class MovimentoConta {
@@ -6,17 +7,40 @@ public class MovimentoConta {
 	private int valorTransacao, tipodaTransacao;
 	private String nomedaFonte;
 	public Date date;
-	public static int TIPO_CREDITO=1,TIPO_DEBITO=2,TIPO_TRANSFERENCIA=3;
+	public static int TIPO_CREDITO = 1, TIPO_DEBITO = 2,
+			TIPO_TRANSFERENCIA = 3;
 
-	public String getNomeExtrato() {
+	public MovimentoConta(ContaMilhagem origem, int valor,
+			ContaMilhagem destino, String nomedaFonte, Date date) {
+		this.contaMilhagemdeOrigem = origem;
+		this.setValorTransacao(valor);
+		this.contaMilhagemdeDestino = destino;
+		this.setNomedaFonte(nomedaFonte);
+		this.date = date;
+	}
+	
+	public MovimentoConta(ContaMilhagem cm, int valor, Date date) {
+		this.setValorTransacao(valor);
+		this.contaMilhagemdeDestino = cm;
+		this.setNomedaFonte("Banco Crédito ou Débito");
+		this.date = date;
+	}
+
+	public String getPrimeiroNome() {
 		String nomeT = this.contaMilhagemdeOrigem.cliente.getNome();
 		String primeiroNome;
-		String ultimoNome;
 		if (nomeT.indexOf(' ') != -1) {
 			primeiroNome = (nomeT.substring(0, nomeT.indexOf(' ')))
 					.toUpperCase();
-		} else
+		} else {
 			primeiroNome = nomeT;
+		}
+		return primeiroNome;
+	}
+
+	public String getUltimoNome() {
+		String nomeT = this.contaMilhagemdeOrigem.cliente.getNome();
+		String ultimoNome;
 		if (nomeT.indexOf(' ') == -1) {
 			ultimoNome = null;
 		} else {
@@ -24,6 +48,23 @@ public class MovimentoConta {
 					.substring(nomeT.lastIndexOf(' '), nomeT.length())
 					.toUpperCase();
 		}
+		return ultimoNome;
+	}
+
+	public String getNomeExtrato() {
+		// String nomeT = this.contaMilhagemdeOrigem.cliente.getNome();
+		String primeiroNome;
+		String ultimoNome;
+		primeiroNome = this.getPrimeiroNome();
+		ultimoNome = this.getUltimoNome();
+
+		/*
+		 * if (nomeT.indexOf(' ') != -1) { primeiroNome = (nomeT.substring(0,
+		 * nomeT.indexOf(' '))) .toUpperCase(); } else primeiroNome = nomeT; if
+		 * (nomeT.indexOf(' ') == -1) { ultimoNome = null; } else { ultimoNome =
+		 * nomeT .substring(nomeT.lastIndexOf(' '), nomeT.length())
+		 * .toUpperCase(); }
+		 */
 		String nome = null;
 		switch (contaMilhagemdeOrigem.cliente.getSexo()) {
 		case 0:
@@ -38,7 +79,6 @@ public class MovimentoConta {
 		return nome;
 
 	}
-	
 
 	public String toString() {
 		String res = "\n" + "Conta de origem: " + this.contaMilhagemdeOrigem
@@ -47,15 +87,6 @@ public class MovimentoConta {
 				+ "Conta de destino: " + this.contaMilhagemdeDestino + " \n"
 				+ "Data: " + this.date;
 		return res;
-	}
-
-	public MovimentoConta(ContaMilhagem origem, int valor,
-			ContaMilhagem destino, String nomedaFonte, Date date) {
-		this.contaMilhagemdeOrigem = origem;
-		this.setValorTransacao(valor);
-		this.contaMilhagemdeDestino = destino;
-		this.setNomedaFonte(nomedaFonte);
-		this.date = date;
 	}
 
 	public int getValorTransacao() {

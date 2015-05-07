@@ -15,21 +15,18 @@ public class RepositorioContaMilhagem {
 		for (int i = 0; i < quantidade; i++) {
 			if (elementos[i].identificadorconta.getNumero() == (c1.getNumero())) {
 				cm = elementos[i];
-				break;
 			}
 		}
 		return cm;
 	}
 
-	public ContaMilhagem buscarpeloCpf(Cpf cpf) {
-		ContaMilhagem cm = null;
+	public ContaMilhagem buscarpeloCpf(String cpf) {
 		for (int i = 0; i < quantidade; i++) {
 			if (elementos[i].cliente.getCpf().equals(cpf)) {
-				cm = elementos[i];
-				break;
+				return elementos[i];
 			}
 		}
-		return cm;
+		return null;
 	}
 
 	public void incluir(ContaMilhagem cm) {
@@ -44,16 +41,18 @@ public class RepositorioContaMilhagem {
 		}
 	}
 
-	public void alterar(ContaMilhagem cm) {
-		for (int i = 0; i < quantidade; i++) {
-			ContaMilhagem a = cm;
-			if (elementos[i].equals(cm)) {
-				elementos[i] = cm;
-
-				Scanner s = new Scanner(System.in);
-				System.out.println();
-				System.out.println("Conta alterada com sucesso!");
-				break;
+	public void alterar(IdentificadorConta existente, ContaMilhagem cm) {
+		if (existente.equals(null)) {
+			System.out.println("Identificador nulo!");
+		} else {
+			for (int i = 0; i < quantidade; i++) {
+				if ((elementos[i].identificadorconta.equals(existente))) {
+					elementos[i] = cm;
+					System.out.println("Conta alterada com sucesso!");
+					break;
+				} else {
+					System.out.println("Erro!");
+				}
 			}
 		}
 	}
