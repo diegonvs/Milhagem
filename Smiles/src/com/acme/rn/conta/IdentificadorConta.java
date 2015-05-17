@@ -31,9 +31,10 @@ public class IdentificadorConta {
 	}
 	
 	public String toString(){
-		String n = "Identificador: "+ this.numero;
+		String n = "" + this.numero;
 		return n;
 	}
+	
 	public static IdentificadorConta criarObjeto(Scanner s) {
 		long n;
 		System.out.print("Informe o número identificador da conta: ");

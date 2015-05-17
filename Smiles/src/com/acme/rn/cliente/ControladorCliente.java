@@ -1,28 +1,27 @@
 package com.acme.rn.cliente;
 
 import com.acme.ado.cliente.RepositorioClientes;
-import com.acme.ado.conta.RepositorioContaMilhagem;
-import com.acme.rn.conta.ContaMilhagem;
-import com.acme.rn.conta.IdentificadorConta;
+import com.acme.rn.conta.ControladorContaMilhagem;
 
 public class ControladorCliente {
-	public static RepositorioClientes rc1;
-	public static RepositorioContaMilhagem rcm1;
-
-	public void Incluir(Cliente novo) {// feito!
+	//Atributos
+	public static RepositorioClientes rc1 = new RepositorioClientes();
+	public static ControladorContaMilhagem ccm = new ControladorContaMilhagem();
+	
+	//M�todos
+	public void Incluir(Cliente novo) {
 		if (novo.equals(null)) {
 			System.out.println("Cliente nulo!");
 		} else {
-			IdentificadorConta ic = new IdentificadorConta(Long.parseLong(novo
-					.getCpf()));
-			ContaMilhagem r = new ContaMilhagem(ic, novo);
-			rc1.incluir(novo);
-			rcm1.incluir(r);
+			//IdentificadorConta ic = new IdentificadorConta(
+					//Long.parseLong(novo.getCpf().getCpf()));
+			//ContaMilhagem r = new ContaMilhagem(ic, novo);
+			ControladorCliente.rc1.incluir(novo);
+			ccm.Inserir(novo.getCpf());
 		}
 
 	}
- //Dúvida: como eu posso "e não fazer mais nada."
- //TODO- mudar a classe Alterar no repositório de clientes com HAZINX
+
 	public void Alterar(Cliente c) {
 		if (c.equals(null)) {
 			System.out.println("Cliente nulo!");
@@ -30,24 +29,24 @@ public class ControladorCliente {
 			rc1.alterar(c);
 		}
 	}
-	
-	public void Excluir(Cpf cpf){
+
+	public void Excluir(Cpf cpf) {
 		if (cpf.equals(null)) {
 			System.out.println("Cpf nulo!");
 		} else {
 			rc1.excluir(cpf);
 		}
 	}
-	
-	public void Buscar(Cpf cpf){
+
+	public void Buscar(Cpf cpf) {
 		if (cpf.equals(null)) {
 			System.out.println("Cpf nulo!");
 		} else {
-			rc1.buscar(cpf.getCpf());
+			rc1.buscarporChave(cpf.getCpf());
 		}
 	}
-	//Dúvida: tá certo mesmo?! :p
-	public void BuscarTodos(){
-		rc1.listar();
+
+	public void BuscarTodos() {
+		rc1.buscaTodos();
 	}
 }

@@ -2,8 +2,11 @@ package com.acme.rn.cliente;
 
 import java.util.Scanner;
 
-public class Cliente extends Cpf {
-	Cpf cpf;
+import com.acme.rn.classesGerais.Identificavel;
+
+public class Cliente extends Identificavel {
+	// Atributos
+	private Cpf cpf;
 	private String nome;
 	private int idade;
 	private int sexo;
@@ -11,28 +14,13 @@ public class Cliente extends Cpf {
 	public static final int SEXO_FEM = 1;
 	private double renda;
 
-	// MÃ©todo para converter para string os valores atribuidos a nome e a cpf da classe
-	public String toString() {
-		String r = "Nome: " + this.nome + "\n" + "Idade: " + this.idade + "\n" + "Renda: " + this.renda
-				+ "\n";
-		return r;
+	// Getters and Setters:
+	public Cpf getCpf() {
+		return cpf;
 	}
 
-	// MÃ©todo que retorna o primeiro nome do atributo nome da classe
-	public String getPrimeiroNome() {
-		String primeiroNome = "";
-		String nome = this.nome;
-		for (int i = 0; i < nome.length(); i++) {
-			if ((i == 0) && (nome.substring(i, i + 1).equalsIgnoreCase(" "))) {
-				System.out
-						.println("Erro: Nome digitado iniciado com tecla ESPAÃ‡O.");
-				break;
-			} else if (!nome.substring(i, i + 1).equalsIgnoreCase(" ")) {
-				primeiroNome += nome.substring(i, i + 1);
-			} else
-				break;
-		}
-		return primeiroNome;
+	public void setCpf(Cpf cpf) {
+		this.cpf = cpf;
 	}
 
 	public String getNome() {
@@ -67,7 +55,33 @@ public class Cliente extends Cpf {
 		this.renda = renda;
 	}
 
-	// MÃ©todo que retorna o primeiro nome do atributo nome da classe
+	// Métodos
+	// Método para converter para string os valores atribuídos a nome e a cpf
+	// da classe
+	public String toString() {
+		String r = "Nome: " + this.nome + "\n" + "Idade: " + this.idade + "\n"
+				+ "Renda: " + this.renda + "\n";
+		return r;
+	}
+
+	// Método que retorna o primeiro nome do atributo nome da classe
+	public String getPrimeiroNome() {
+		String primeiroNome = "";
+		String nome = this.nome;
+		for (int i = 0; i < nome.length(); i++) {
+			if ((i == 0) && (nome.substring(i, i + 1).equalsIgnoreCase(" "))) {
+				System.out
+						.println("Erro: Nome digitado iniciado com tecla ESPAÃ‡O.");
+				break;
+			} else if (!nome.substring(i, i + 1).equalsIgnoreCase(" ")) {
+				primeiroNome += nome.substring(i, i + 1);
+			} else
+				break;
+		}
+		return primeiroNome;
+	}
+
+	// Método que retorna o primeiro nome do atributo nome da classe
 	public String getUltimoNome() {
 		String nome = this.nome;
 		String ultimoNome = "";
@@ -80,10 +94,10 @@ public class Cliente extends Cpf {
 		}
 		return ultimoNome;
 	}
-	
+
 	public static Cliente criarObjeto(Scanner s) {
 		String nome;
-		int idade,sexo;
+		int idade, sexo;
 		double renda;
 		System.out.println("Informe o nome do cliente: ");
 		nome = s.nextLine();
@@ -91,17 +105,23 @@ public class Cliente extends Cpf {
 		idade = s.nextInt();
 		System.out.println("Informe a renda do cliente: ");
 		renda = s.nextDouble();
-		System.out.println("Informe o sexo do cliente[0 para Masculino,1 para Feminino]: ");
+		System.out
+				.println("Informe o sexo do cliente[0 para Masculino,1 para Feminino]: ");
 		sexo = s.nextInt();
 		Cpf cpf = Cpf.criarObjeto(s);
-		Cliente c = new Cliente(cpf.toString(), nome, idade,renda,sexo);
+		Cliente c = new Cliente(cpf.toString(), nome, idade, renda, sexo);
 		return c;
 	}
-	
+
+	public String getChave() {
+		return this.cpf.getCpf();
+	}
+
 	// Construtor com atributo cpf do tipo inteiro
 	public Cliente(int numero, int dig, String nome, int idade, double renda,
 			int sexo) {
-		super(numero, dig);
+		this.cpf.setDigito(dig);
+		this.cpf.setNumero(numero);
 		this.setNome(nome);
 		this.setIdade(idade);
 		this.setRenda(renda);
@@ -110,10 +130,11 @@ public class Cliente extends Cpf {
 
 	// Construtor com atributo cpf do tipo string
 	public Cliente(String cpf, String nome, int idade, double renda, int sexo) {
-		super(cpf);
+		this.cpf.setCpf(cpf);
 		this.setNome(nome);
 		this.setIdade(idade);
 		this.setRenda(renda);
 		this.setSexo(sexo);
 	}
+
 }

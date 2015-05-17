@@ -1,41 +1,39 @@
 package com.acme.ado.cliente;
 
+import com.acme.ado.classesGerais.RepositorioIdentificaveis;
 import com.acme.rn.cliente.Cliente;
 import com.acme.rn.cliente.Cpf;
 
 public class RepositorioClientes {
-
-	private Cliente[] elementos;
-	private int qtd;
+	/*
+	 * private Cliente[] elementos; private int qtd;
+	 */
+	private RepositorioIdentificaveis ri;
 
 	public RepositorioClientes() {
-		elementos = new Cliente[150];
-		qtd = 0;
+		ri = new RepositorioIdentificaveis();
+		/*
+		 * elementos = new Cliente[150]; qtd = 0;
+		 */
 	}
 
-	public Cliente buscar(String chave) {
-		Cliente r = null;
-		for (int i = 0; i < qtd; i++) {
-			if (chave.equals(elementos[i].getCpf())) {
-				r = this.elementos[i];
-				return r;
-			}
-		}
-		return null;
+	public Cliente buscarporChave(String chave) {
+		return (Cliente) ri.buscar(chave);
 	}
 
 	public void incluir(Cliente c) {
-		if (qtd < this.elementos.length && c != null) {
-			this.elementos[qtd++] = c;
+		if (ri.qtd < this.ri.elementos.length && c != null) {
+			this.ri.elementos[ri.qtd++] = c;
 		} else {
-			System.out.println("O repositório está cheio ou cliente é nulo! ");
+			System.out
+					.println("O repositório está cheio ou cliente é nulo! ");
 		}
 	}
 
 	public void alterar(Cliente cliente) {
-		for (int i = 0; i < qtd; i++) {
-			if (elementos[i].equals(cliente)) {
-				elementos[i] = cliente;
+		for (int i = 0; i < ri.qtd; i++) {
+			if (ri.elementos[i].equals(cliente)) {
+				ri.elementos[i] = cliente;
 				break;
 			}
 		}
@@ -43,11 +41,11 @@ public class RepositorioClientes {
 
 	public boolean excluir(Cpf cpf) {
 		boolean r = false;
-		for (int i = 0; i < qtd; i++) {
-			if (elementos[i].getCpf().equals(cpf.getCpf())) {
-				elementos[i] = null;
-				elementos[i] = elementos[--qtd];
-				elementos[qtd] = null;
+		for (int i = 0; i < ri.qtd; i++) {
+			if (ri.elementos[i].getChave().equals(cpf.getCpf())) {
+				ri.elementos[i] = null;
+				ri.elementos[i] = ri.elementos[ri.qtd--];
+				ri.elementos[ri.qtd] = null;
 				r = true;
 				break;
 			}
@@ -55,13 +53,11 @@ public class RepositorioClientes {
 		return r;
 	}
 
-	public void listar() {
-		System.out.println("--- CLIENTES CADASTRADOS ---");
-		for (int i = 0; i < qtd; i++) {
-			System.out.println("Dados do cliente: " + (i + 1));
-			System.out.println(elementos[i].toString());
+	public Cliente[] buscaTodos() {
+		Cliente[] clientes = new Cliente[ri.qtd];
+		for (int i = 0; i < ri.qtd; i++) {
+			clientes[i] = (Cliente) ri.elementos[i];
 		}
-		System.out.println("----------------------------");
+		return clientes;
 	}
-
 }

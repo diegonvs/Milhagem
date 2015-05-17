@@ -1,90 +1,72 @@
 package com.acme.ado.conta;
 
-import java.util.Scanner;
-
-import com.acme.rn.cliente.Cpf;
+import com.acme.ado.classesGerais.RepositorioIdentificaveis;
 import com.acme.rn.conta.ContaMilhagem;
 import com.acme.rn.conta.IdentificadorConta;
 
-public class RepositorioContaMilhagem {
-	private ContaMilhagem[] elementos;
-	private int quantidade;
+//ARRUMADA!
+public class RepositorioContaMilhagem extends RepositorioIdentificaveis {
+	// Atributos:
+	/*
+	 * private ContaMilhagem[] elementos; private int quantidade;
+	 */
+	RepositorioIdentificaveis ri;
 
+	// Getters and Setters
+	/*
+	 * public ContaMilhagem[] getElementos() { return elementos; }
+	 * 
+	 * public void setElementos(ContaMilhagem[] elementos) { this.elementos =
+	 * elementos; }
+	 * 
+	 * public int getQuantidade() { return quantidade; }
+	 * 
+	 * public void setQuantidade(int quantidade) { this.quantidade = quantidade;
+	 * }
+	 */
+
+	// Construtor:
+	public RepositorioContaMilhagem() {
+		ri = new RepositorioIdentificaveis();
+		/*
+		 * elementos = new ContaMilhagem[150]; quantidade = 0;
+		 */
+	}
+
+	// M�todos:
 	public ContaMilhagem buscar(IdentificadorConta c1) {
-		ContaMilhagem cm = null;
-		for (int i = 0; i < quantidade; i++) {
-			if (elementos[i].identificadorconta.getNumero() == (c1.getNumero())) {
-				cm = elementos[i];
-			}
-		}
+		ContaMilhagem cm = (ContaMilhagem) ri.buscar(c1.toString());
 		return cm;
 	}
 
 	public ContaMilhagem buscarpeloCpf(String cpf) {
-		for (int i = 0; i < quantidade; i++) {
-			if (elementos[i].cliente.getCpf().equals(cpf)) {
-				return elementos[i];
-			}
-		}
-		return null;
+		ContaMilhagem cm = (ContaMilhagem) ri.buscar(cpf);
+		return cm;
 	}
 
 	public void incluir(ContaMilhagem cm) {
-		if (quantidade < this.elementos.length) {
-			if (this.buscar(cm.identificadorconta) == null) {
-				this.elementos[quantidade++] = cm;
-			} else {
-				System.out.println("Elemento já existente no repositório!");
-			}
-		} else {
-			System.out.println("Repositório cheio!");
-		}
+		ri.incluir(cm);
 	}
 
 	public void alterar(IdentificadorConta existente, ContaMilhagem cm) {
-		if (existente.equals(null)) {
-			System.out.println("Identificador nulo!");
-		} else {
-			for (int i = 0; i < quantidade; i++) {
-				if ((elementos[i].identificadorconta.equals(existente))) {
-					elementos[i] = cm;
-					System.out.println("Conta alterada com sucesso!");
-					break;
-				} else {
-					System.out.println("Erro!");
-				}
-			}
-		}
+		ri.alterar(cm);
 	}
 
 	public boolean excluir(ContaMilhagem cm) {
-		boolean r = false;
-		for (int i = 0; i < quantidade; i++) {
-			if (elementos[i].identificadorconta.getNumero() == (cm.identificadorconta
-					.getNumero())) {
-				elementos[i] = null;
-				elementos[i] = elementos[--quantidade];
-				elementos[quantidade] = null;
-				r = true;
-				System.out.println("Conta de " + cm.cliente.getNome()
-						+ " removida com sucesso!");
-				break;
-			}
+		if (ri.excluir(cm.toString())) {
+			return true;
+		} else {
+			return false;
 		}
-		return r;
 	}
 
 	public void listar() {
 		System.out.println("-- Contas Milhagem Existentes: --");
-		for (int i = 0; i < quantidade; i++) {
+		for (int i = 0; i < ri.qtd; i++) {
 			System.out.println("Dados: " + (i + 1));
 			System.out.println(elementos[i]);
 		}
 		System.out.println("---------------------------------");
 	}
 
-	public RepositorioContaMilhagem() {
-		elementos = new ContaMilhagem[150];
-		quantidade = 0;
-	}
 }

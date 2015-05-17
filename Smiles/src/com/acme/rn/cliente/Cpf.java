@@ -1,23 +1,27 @@
 package com.acme.rn.cliente;
+
 import java.util.Scanner;
-
+//FEITO!
 public class Cpf {
-
+	// Atributos
 	private int numero;
 	private int digito;
+	private String cpf;
 
+	// Construtores
 	public Cpf(int numero, int digito) {
-		//Construtor que recebe dois inteiros
 		this.setNumero(numero);
 		this.setDigito(digito);
 	}
 
 	public Cpf(String cpf) {
-		//Construtor sobrescrito que recebe uma String
-		int numero = Integer.parseInt(cpf.substring(0, 9));
-		int dig = Integer.parseInt(cpf.substring(9, 11));
-		this.setNumero(numero);
-		this.setDigito(dig);
+		// Construtor sobrescrito que recebe uma String
+		this.setCpf(cpf);
+	}
+
+	// Getters And Setters
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 
 	public int getNumero() {
@@ -43,18 +47,19 @@ public class Cpf {
 			System.err.println("Digito do cpf invalido!");
 		}
 	}
-	
-	public String getCpf(){
+
+	public String getCpf() {
 		String n1 = Integer.toString(this.numero);
 		String n2 = Integer.toString(this.digito);
 		String resultado = n1 + n2;
 		return resultado;
 	}
 
-	/*public boolean equals(Cpf cpf) {
-		return this.numero == cpf.numero && this.digito == cpf.digito;
-	}*/
+	public String getCpfString() {
+		return this.cpf;
+	}
 
+	// Métodos
 	public String toString() {
 		return "CPF: " + this.getCpf();
 	}
@@ -69,5 +74,6 @@ public class Cpf {
 		s.nextLine();
 		Cpf c = new Cpf(num, dig);
 		return c;
+
 	}
 }

@@ -1,5 +1,4 @@
 package com.acme.testes.conta;
-import java.util.Date;
 
 import com.acme.ado.conta.RepositorioMovimentoConta;
 import com.acme.rn.cliente.Cliente;
@@ -23,10 +22,8 @@ public class TesteRepositorioMovimentoConta {
 		// Iniciando o repositório!
 		RepositorioMovimentoConta rmc1 = new RepositorioMovimentoConta();
 		// //////////////////////////////////////////////////////////////////////////////
-		MovimentoConta mc1 = new MovimentoConta(cm1, 200, cm2,
-				cm1.cliente.getNome(), new Date());
-		MovimentoConta mc2 = new MovimentoConta(cm2, 200, cm1,
-				cm2.cliente.getNome(), new Date());
+		MovimentoConta mc1 = new MovimentoConta(cm1, 200);
+		MovimentoConta mc2 = new MovimentoConta(cm2, 200);
 		// Incluindo os movimentos conta mc1 e mc2
 		rmc1.incluir(mc1);
 		rmc1.incluir(mc2);

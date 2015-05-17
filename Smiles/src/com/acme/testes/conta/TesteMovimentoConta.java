@@ -1,5 +1,4 @@
 package com.acme.testes.conta;
-import java.util.*;
 
 import com.acme.rn.cliente.Cliente;
 import com.acme.rn.conta.ContaMilhagem;
@@ -15,10 +14,8 @@ public class TesteMovimentoConta {
 		IdentificadorConta ic2 = new IdentificadorConta(2);
 		ContaMilhagem cm1 = new ContaMilhagem(ic, c);
 		ContaMilhagem cm2 = new ContaMilhagem(ic2, c2);
-		MovimentoConta mc1 = new MovimentoConta(cm1, 200, cm2,
-				"Diego Nascimento", new Date());
-		MovimentoConta mc2 = new MovimentoConta(cm2, 200, cm1, "Teste",
-				new Date());
+		MovimentoConta mc1 = new MovimentoConta(cm1, 200);
+		MovimentoConta mc2 = new MovimentoConta(cm2, 200);
 		///////////////////////////////////////////////////////////////////////////
 		System.out.println(cm1.getSaldo());
 		System.out.println(cm2.getSaldo());

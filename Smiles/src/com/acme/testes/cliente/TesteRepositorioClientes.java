@@ -26,13 +26,13 @@ public class TesteRepositorioClientes {
 		rc.incluir(c4);
 		rc.incluir(c5);
 		rc.incluir(c6);
-		rc.listar();
+		rc.buscaTodos();
 		///////////////////////////////////////////////////////////////////////////////////
-		System.out.println(rc.buscar("10879780410"));
-		System.out.println(rc.buscar("12345678910"));
-		System.out.println(rc.excluir(c4));///Excluindo o cliente "c4" (Nome:"Exú Caveirinha da Silva) do repositório
+		System.out.println(rc.buscarporChave("10879780410"));
+		System.out.println(rc.buscarporChave("12345678910"));
+		System.out.println(rc.excluir(c4.getCpf()));///Excluindo o cliente "c4" (Nome:"Exú Caveirinha da Silva) do repositório
 		System.out.println("Segundo listar sem o cliente c4(Exú Caveirinha da Silva): ");
-		rc.listar();
+		rc.buscaTodos();
 	}
 	
 }
