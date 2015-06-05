@@ -1,10 +1,10 @@
 package com.acme.rn.conta;
 
-import java.util.*;
+import java.util.Date;
 
-import com.acme.rn.classesGerais.Identificavel;
+import com.acme.rn.classesGerais.Registro;
 
-public class MovimentoConta extends Identificavel {
+public abstract class MovimentoConta extends Registro {
 	// Atributos:
 	ContaMilhagem contaMilhagemdeOrigem;
 	private int valorTransacao; // tipodaTransacao;
@@ -15,14 +15,14 @@ public class MovimentoConta extends Identificavel {
 	 * public static int TIPO_CREDITO = 1, TIPO_DEBITO = 2, TIPO_TRANSFERENCIA =
 	 * 3;
 	 */
-	// Construtores
-
-	public MovimentoConta(ContaMilhagem cm, int valor) {
-		this.setValorTransacao(valor);
-		this.contaMilhagemdeOrigem = cm;
-		this.setNomedaFonte("Banco Cr√©dito ou D√©bito");
-		this.date = new Date();
-	}
+	/*
+	 * Construtores
+	 * 
+	 * public MovimentoConta(ContaMilhagem cm, int valor) {
+	 * this.setValorTransacao(valor); this.contaMilhagemdeOrigem = cm;
+	 * this.setNomedaFonte("Banco Cr√©dito ou D√©bito"); this.date = new Date();
+	 * }
+	 */
 
 	// MÈtodos
 	public String getPrimeiroNome() {
@@ -74,8 +74,8 @@ public class MovimentoConta extends Identificavel {
 	public String toString() {
 		String res = "\n" + "Conta de origem: " + this.contaMilhagemdeOrigem
 				+ " \n" + "Nome da fonte: " + this.getNomedaFonte() + " \n"
-				+ "Valor: " + this.getValorTransacao() + " \n"
-				+ "Data: " + this.date;
+				+ "Valor: " + this.getValorTransacao() + " \n" + "Data: "
+				+ this.date;
 		return res;
 	}
 
@@ -105,5 +105,21 @@ public class MovimentoConta extends Identificavel {
 	public String getChave() {
 		return Long.toString(this.contaMilhagemdeOrigem.getIdentificadorconta()
 				.getNumero());
+	}
+	
+	@Override
+	public void validar() {
+		if(this.contaMilhagemdeOrigem.equals(null)){
+			System.err.println("Conta Milhagem n„o pode ser null");
+		}
+		if(this.valorTransacao <= 0){
+			System.err.println("Valor n„o pode ser menor ou igual a zero!");
+		}
+		if(this.nomedaFonte.length() > 100){
+			System.err.println("N„o pode conter mais que 100 caracteres.");
+		}
+		if(this.date.equals(null)){
+			System.err.println("Date n„o pode ser null");
+		}
 	}
 }

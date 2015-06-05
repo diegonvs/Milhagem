@@ -26,7 +26,10 @@ public class MovimentoContaCredito extends MovimentoConta {
 
 	// Construtor
 	public MovimentoContaCredito(ContaMilhagem cm, int valor) {
-		super(cm, valor);
+		this.cm = cm;
+		this.setNomedaFonte(cm.getCliente().getNome());
+		this.setValorTransacao(valor);
+		this.setValor(valor);
 		this.date = new Date();
 	}
 

@@ -1,11 +1,12 @@
 package com.acme.testes.cliente;
 
 import com.acme.ado.cliente.RepositorioClientes;
+import com.acme.excecoes.AtributoInvalidoException;
 import com.acme.rn.cliente.Cliente;
 
 public class TesteRepositorioClientes {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws AtributoInvalidoException {
 		///Inicializando o repositório.////////////////////////////////////////////////////
 		RepositorioClientes rc = new RepositorioClientes();
 		///////////////////////////////////////////////////////////////////////////////////

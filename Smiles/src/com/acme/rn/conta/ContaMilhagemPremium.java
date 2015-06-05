@@ -1,15 +1,25 @@
 package com.acme.rn.conta;
 
+import com.acme.excecoes.AtributoInvalidoException;
 import com.acme.rn.cliente.Cliente;
 
 public class ContaMilhagemPremium extends ContaMilhagem {
 	private double fatorMultiplicacaoCredito;
 
-	public void Creditar(int valor, double fatorMult) {
+	public void Creditar(int valor, double fatorMult)
+			throws AtributoInvalidoException {
+		if (valor <= 0) {
+			throw new AtributoInvalidoException(
+					"Valor precisa ser maior que zero!");
+		}
 		super.Creditar((int) (valor * fatorMult));
 	}
 
-	public void Creditar(int valor) {
+	public void Creditar(int valor) throws AtributoInvalidoException {
+		if (valor <= 0) {
+			throw new AtributoInvalidoException(
+					"Valor precisa ser maior que zero");
+		}
 		this.Creditar(valor, this.fatorMultiplicacaoCredito);
 	}
 
@@ -28,7 +38,7 @@ public class ContaMilhagemPremium extends ContaMilhagem {
 		super(id, cliente);
 		this.fatorMultiplicacaoCredito = fatorMultiplicacaoCredito;
 	}
-	
+
 	public ContaMilhagemPremium(IdentificadorConta id, Cliente cliente) {
 		super(id, cliente);
 		this.fatorMultiplicacaoCredito = 1;

@@ -1,58 +1,86 @@
 package com.acme.ado.classesGerais;
 
-import com.acme.rn.classesGerais.Identificavel;
+import com.acme.excecoes.AtributoInvalidoException;
+import com.acme.excecoes.ObjetoExistenteException;
+import com.acme.excecoes.ObjetoNaoExistenteException;
+import com.acme.rn.classesGerais.Registro;
 
-public class RepositorioIdentificaveis {
+public class RepositorioIdentificaveis implements
+		InterfaceRepositorioIdentificaveis {
 
-	public Identificavel[] elementos;
+	public Registro[] elementos;
 	public int qtd;
 
 	// Construtor
 	public RepositorioIdentificaveis() {
-		elementos = new Identificavel[150];
+		elementos = new Registro[150];
 		this.qtd = 0;
 	}
 
-	public Identificavel buscar(String chave) {
-		Identificavel r = null;
+	public Registro buscar(String chave) throws AtributoInvalidoException,ObjetoNaoExistenteException {
+		Registro r = null;
+		if(chave.equals(null)){
+			throw new AtributoInvalidoException("Chave nula!");
+		}
 		for (int i = 0; i < qtd; i++) {
 			if (chave.equals(elementos[i].getChave())) {
 				r = elementos[i];
 				return r;
 			}
 		}
-		return null;
+		throw new ObjetoNaoExistenteException("Objeto não encontrado!");
 	}
 
-	public void incluir(Identificavel id) {
-		if (qtd < elementos.length && id != null) {
-			elementos[qtd++] = id;
+	public void incluir(Registro id) throws AtributoInvalidoException,
+			ObjetoExistenteException {
+			if (qtd < elementos.length && id != null) {
+				elementos[qtd++] = id;
+			} else {
+				System.out
+						.println("O repositório está cheio ou cliente é nulo! ");
+				throw new ObjetoExistenteException(
+						"O repositório está cheio ou cliente é nulo!");
+			}
+	}
+
+	public void alterar(Registro id) throws AtributoInvalidoException,
+			ObjetoNaoExistenteException {
+		if (id.equals(null)) {
+			throw new AtributoInvalidoException("Parâmetro null!");
 		} else {
-			System.out.println("O repositório está cheio ou cliente é nulo! ");
-		}
-	}
-
-	public void alterar(Identificavel id) {
-		for (int i = 0; i < qtd; i++) {
-			if (elementos[i].equals(id)) {
-				elementos[i] = id;
-				break;
+			for (int i = 0; i < qtd; i++) {
+				if (elementos[i].equals(id)) {
+					elementos[i] = id;
+					break;
+				} else {
+					throw new ObjetoNaoExistenteException(
+							"Objeto não encontrado!");
+				}
 			}
 		}
 	}
 
-	public boolean excluir(String s) {
+	public boolean excluir(String s) throws AtributoInvalidoException,
+			ObjetoNaoExistenteException {
 		boolean r = false;
-		for (int i = 0; i < qtd; i++) {
-			if (this.elementos[i].getChave().equals(s)) {
-				elementos[i] = null;
-				elementos[i] = elementos[--qtd];
-				elementos[qtd] = null;
-				r = true;
-				break;
+		if (this.buscar(s).equals(null)) {
+			throw new AtributoInvalidoException("Atributo Inválido!");
+		} else {
+			for (int i = 0; i < qtd; i++) {
+				if (this.elementos[i].getChave().equals(s)) {
+					elementos[i] = null;
+					elementos[i] = elementos[qtd];
+					elementos[qtd] = null;
+					r = true;
+					qtd--;
+					break;
+				} else {
+					throw new ObjetoNaoExistenteException(
+							"Objeto não encontrado");
+				}
 			}
+			return r;
 		}
-		return r;
 	}
 
 	public void listar() {
@@ -63,22 +91,5 @@ public class RepositorioIdentificaveis {
 		}
 		System.out.println("----------------------------");
 	}
-
-	// Getters and setters
-	/*public Identificavel[] getElementos() {
-		return elementos;
-	}
-
-	public void setElementos(Identificavel[] elementos) {
-		this.elementos = elementos;
-	}
-
-	public int getQtd() {
-		return qtd;
-	}
-
-	public void setQtd(int qtd) {
-		this.qtd = qtd;
-	}*/
 
 }

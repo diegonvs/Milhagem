@@ -2,9 +2,9 @@ package com.acme.rn.cliente;
 
 import java.util.Scanner;
 
-import com.acme.rn.classesGerais.Identificavel;
+import com.acme.rn.classesGerais.Registro;
 
-public class Cliente extends Identificavel {
+public class Cliente extends Registro {
 	// Atributos
 	private Cpf cpf;
 	private String nome;
@@ -130,11 +130,32 @@ public class Cliente extends Identificavel {
 
 	// Construtor com atributo cpf do tipo string
 	public Cliente(String cpf, String nome, int idade, double renda, int sexo) {
+		this.validar();
 		this.cpf.setCpf(cpf);
 		this.setNome(nome);
 		this.setIdade(idade);
 		this.setRenda(renda);
 		this.setSexo(sexo);
+	}
+
+	@Override
+	public void validar() {
+		// TODO Auto-generated method stub
+		if(this.cpf.equals(null)){
+			System.err.println("Cpf não pode ser nulo!");
+		}
+		if(this.nome.equals(null) || this.nome.length() == 60 || this.nome.equals(" ")){
+			System.err.println("Nome não pode ser null ou ter mais que 60 caracteres");
+		}
+		if(this.idade<18 || this.idade>200){
+			System.err.println("Idade não pode ser menor que 18 ou maior que 200");
+		}
+		if(this.renda < 0 || this.renda > 1000000){
+			System.err.println("Renda não pode ser negativa ou maior que um milhão.");
+		}
+		if(!(this.sexo == 1 || this.sexo == 0)){
+			System.err.println("Sexo só pode ter valor de 0[Masculino] e 1[Feminino]");
+		}
 	}
 
 }

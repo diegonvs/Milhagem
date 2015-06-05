@@ -1,13 +1,16 @@
 package com.acme.testes.conta;
 
 import com.acme.ado.conta.RepositorioContaMilhagem;
+import com.acme.excecoes.AtributoInvalidoException;
+import com.acme.excecoes.ObjetoExistenteException;
+import com.acme.excecoes.ObjetoNaoExistenteException;
 import com.acme.rn.cliente.Cliente;
 import com.acme.rn.conta.ContaMilhagem;
 import com.acme.rn.conta.IdentificadorConta;
 
 public class TesteRepositorioContaMilhagem {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ObjetoExistenteException, AtributoInvalidoException, ObjetoNaoExistenteException {
 		// iniciando as contas milhagem.
 		Cliente c1 = new Cliente("10879780410", "Diego Nascimento", 18, 100, 0);
 		IdentificadorConta ic1 = new IdentificadorConta(100);

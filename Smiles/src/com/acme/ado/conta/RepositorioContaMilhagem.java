@@ -1,29 +1,18 @@
 package com.acme.ado.conta;
 
+import com.acme.ado.classesGerais.InterfaceRepositorioContaMilhagem;
 import com.acme.ado.classesGerais.RepositorioIdentificaveis;
+import com.acme.excecoes.AtributoInvalidoException;
+import com.acme.excecoes.ObjetoExistenteException;
+import com.acme.excecoes.ObjetoNaoExistenteException;
 import com.acme.rn.conta.ContaMilhagem;
 import com.acme.rn.conta.IdentificadorConta;
 
 //ARRUMADA!
-public class RepositorioContaMilhagem extends RepositorioIdentificaveis {
+public class RepositorioContaMilhagem extends RepositorioIdentificaveis
+		implements InterfaceRepositorioContaMilhagem {
 	// Atributos:
-	/*
-	 * private ContaMilhagem[] elementos; private int quantidade;
-	 */
 	RepositorioIdentificaveis ri;
-
-	// Getters and Setters
-	/*
-	 * public ContaMilhagem[] getElementos() { return elementos; }
-	 * 
-	 * public void setElementos(ContaMilhagem[] elementos) { this.elementos =
-	 * elementos; }
-	 * 
-	 * public int getQuantidade() { return quantidade; }
-	 * 
-	 * public void setQuantidade(int quantidade) { this.quantidade = quantidade;
-	 * }
-	 */
 
 	// Construtor:
 	public RepositorioContaMilhagem() {
@@ -34,29 +23,71 @@ public class RepositorioContaMilhagem extends RepositorioIdentificaveis {
 	}
 
 	// Métodos:
-	public ContaMilhagem buscar(IdentificadorConta c1) {
-		ContaMilhagem cm = (ContaMilhagem) ri.buscar(c1.toString());
-		return cm;
+	public ContaMilhagem buscar(IdentificadorConta c1)
+			throws AtributoInvalidoException {
+		if (c1.equals(null)) {
+			throw new AtributoInvalidoException("Identificador Nulo!");
+		}
+		ContaMilhagem cm;
+		try {
+			cm = (ContaMilhagem) ri.buscar(c1.toString());
+			return cm;
+		} catch (ObjetoNaoExistenteException e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
 	}
 
-	public ContaMilhagem buscarpeloCpf(String cpf) {
-		ContaMilhagem cm = (ContaMilhagem) ri.buscar(cpf);
-		return cm;
+	public ContaMilhagem buscarpeloCpf(String cpf)
+			throws AtributoInvalidoException, ObjetoNaoExistenteException {
+		ContaMilhagem cm;
+		if (cpf.equals(null)) {
+			throw new AtributoInvalidoException("Cpf nulo!");
+		}
+		try {
+			cm = (ContaMilhagem) ri.buscar(cpf);
+			return cm;
+		} catch (ObjetoNaoExistenteException e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+
 	}
 
-	public void incluir(ContaMilhagem cm) {
-		ri.incluir(cm);
+	public void incluir(ContaMilhagem cm) throws AtributoInvalidoException,
+			ObjetoExistenteException {
+		if (cm.equals(null)) {
+			throw new AtributoInvalidoException("Conta Milhagem Null!");
+		}
+		try {
+			ri.incluir(cm);
+		} catch (ObjetoExistenteException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
-	public void alterar(IdentificadorConta existente, ContaMilhagem cm) {
-		ri.alterar(cm);
+	public void alterar(IdentificadorConta existente, ContaMilhagem cm)
+			throws AtributoInvalidoException, ObjetoNaoExistenteException {
+		if (cm.equals(null) || existente.equals(null)) {
+			throw new AtributoInvalidoException(
+					"Identificador ou ContaMilhagem null!");
+		}
+		try {
+			ri.alterar(cm);
+		} catch (ObjetoNaoExistenteException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
-	public boolean excluir(ContaMilhagem cm) {
+	public boolean excluir(ContaMilhagem cm) throws AtributoInvalidoException,
+			ObjetoNaoExistenteException {
+		if (cm.equals(null)) {
+			throw new AtributoInvalidoException("ContaMilhagem null!");
+		}
 		if (ri.excluir(cm.toString())) {
 			return true;
 		} else {
-			return false;
+			throw new ObjetoNaoExistenteException("Objeto não encontrado!");
 		}
 	}
 

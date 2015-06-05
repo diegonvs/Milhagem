@@ -4,6 +4,8 @@ import com.acme.rn.cliente.Cliente;
 import com.acme.rn.conta.ContaMilhagem;
 import com.acme.rn.conta.IdentificadorConta;
 import com.acme.rn.conta.MovimentoConta;
+import com.acme.rn.conta.MovimentoContaCredito;
+import com.acme.rn.conta.MovimentoContaDebito;
 
 public class TesteMovimentoConta {
 
@@ -14,8 +16,8 @@ public class TesteMovimentoConta {
 		IdentificadorConta ic2 = new IdentificadorConta(2);
 		ContaMilhagem cm1 = new ContaMilhagem(ic, c);
 		ContaMilhagem cm2 = new ContaMilhagem(ic2, c2);
-		MovimentoConta mc1 = new MovimentoConta(cm1, 200);
-		MovimentoConta mc2 = new MovimentoConta(cm2, 200);
+		MovimentoConta mc1 = new MovimentoContaCredito(cm1, 200);
+		MovimentoConta mc2 = new MovimentoContaDebito(cm2, 200,cm2.getCliente().getNome());
 		///////////////////////////////////////////////////////////////////////////
 		System.out.println(cm1.getSaldo());
 		System.out.println(cm2.getSaldo());

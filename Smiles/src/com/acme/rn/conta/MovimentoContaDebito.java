@@ -12,7 +12,8 @@ public class MovimentoContaDebito extends MovimentoConta {
 	// Construtor
 	public MovimentoContaDebito(ContaMilhagem destino, int valor,
 			String nomedaFonte) {
-		super(destino, valor);
+		this.contaMilhagem = destino;
+		this.setValorTransacao(valor);
 		this.setNomedaFonte(nomedaFonte);
 		this.date = new Date();
 	}

@@ -2,10 +2,12 @@ package com.acme.rn.conta;
 
 import java.util.Scanner;
 
-import com.acme.rn.classesGerais.Identificavel;
+import com.acme.excecoes.AtributoInvalidoException;
+import com.acme.excecoes.SaldoInsuficienteException;
+import com.acme.rn.classesGerais.Registro;
 import com.acme.rn.cliente.Cliente;
 
-public class ContaMilhagem extends Identificavel {
+public class ContaMilhagem extends Registro {
 	// Atributos:
 	private IdentificadorConta identificadorconta;
 	private Cliente cliente;
@@ -13,26 +15,42 @@ public class ContaMilhagem extends Identificavel {
 	private boolean ativa;
 
 	// Métodos
-	public void Creditar(int valor) {
+	public void Creditar(int valor) throws AtributoInvalidoException {
 		if (valor > 0) {
 			this.saldo = valor + saldo;
 		} else {
-			System.out.println("Valor precisa ser maior que zero.");
+			throw new AtributoInvalidoException(
+					"Valor precisa ser maior que zero.");
 		}
 
 	}
 
-	public void Debitar(int valor) {
+	public void Debitar(int valor) throws AtributoInvalidoException,
+			SaldoInsuficienteException {
+		if (valor <= 0) {
+			throw new AtributoInvalidoException(
+					"Valor precisa ser maior que zero!");
+		}
 		if (saldo > valor) {
 			this.saldo = saldo - valor;
 		} else {
-			System.out.println("Saldo insuficiente!");
+			throw new SaldoInsuficienteException("Saldo Insuficiente!");
 		}
 	}
 
-	public void Transferir(int valor, ContaMilhagem c) {
-		c.Creditar(valor);
-		this.Debitar(valor);
+	public void Transferir(int valor, ContaMilhagem c)
+			throws AtributoInvalidoException, SaldoInsuficienteException {
+		if (valor <= 0) {
+			throw new AtributoInvalidoException(
+					"Valor precisa ser maior que zero!");
+		}
+		try {
+			c.Creditar(valor);
+			this.Debitar(valor);
+		} catch (SaldoInsuficienteException e) {
+			System.out.println(e.getMessage());
+		}
+
 	}
 
 	public void Desativar() {
@@ -101,6 +119,20 @@ public class ContaMilhagem extends Identificavel {
 
 	public void setAtiva(boolean ativa) {
 		this.ativa = ativa;
+	}
+
+	@Override
+	public void validar() {
+		// TODO Auto-generated method stub
+		if (identificadorconta.equals(null)) {
+			System.err.println("Identificador não pode ser null!");
+		}
+		if (cliente.equals(null)) {
+			System.err.println("Cliente não pode ser null!");
+		}
+		if (this.saldo < 0) {
+			System.err.println("Saldo não pode ser negativo!");
+		}
 	}
 
 }
