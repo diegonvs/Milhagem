@@ -122,16 +122,18 @@ public class ContaMilhagem extends Registro {
 	}
 
 	@Override
-	public void validar() {
+	public void validar() throws AtributoInvalidoException,
+			SaldoInsuficienteException {
 		// TODO Auto-generated method stub
 		if (identificadorconta.equals(null)) {
-			System.err.println("Identificador não pode ser null!");
+			throw new AtributoInvalidoException(
+					"Identificador não pode ser null!");
 		}
 		if (cliente.equals(null)) {
-			System.err.println("Cliente não pode ser null!");
+			throw new AtributoInvalidoException("Cliente não pode ser null!");
 		}
 		if (this.saldo < 0) {
-			System.err.println("Saldo não pode ser negativo!");
+			throw new SaldoInsuficienteException("Saldo não pode ser negativo!");
 		}
 	}
 

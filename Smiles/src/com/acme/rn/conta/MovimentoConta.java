@@ -2,6 +2,7 @@ package com.acme.rn.conta;
 
 import java.util.Date;
 
+import com.acme.excecoes.AtributoInvalidoException;
 import com.acme.rn.classesGerais.Registro;
 
 public abstract class MovimentoConta extends Registro {
@@ -108,18 +109,18 @@ public abstract class MovimentoConta extends Registro {
 	}
 	
 	@Override
-	public void validar() {
+	public void validar() throws AtributoInvalidoException {
 		if(this.contaMilhagemdeOrigem.equals(null)){
-			System.err.println("Conta Milhagem não pode ser null");
+			throw new AtributoInvalidoException("Conta Milhagem não pode ser null");
 		}
 		if(this.valorTransacao <= 0){
-			System.err.println("Valor não pode ser menor ou igual a zero!");
+			throw new AtributoInvalidoException("Valor não pode ser menor ou igual a zero!");
 		}
 		if(this.nomedaFonte.length() > 100){
-			System.err.println("Não pode conter mais que 100 caracteres.");
+			throw new AtributoInvalidoException("Não pode conter mais que 100 caracteres.");
 		}
 		if(this.date.equals(null)){
-			System.err.println("Date não pode ser null");
+			throw new AtributoInvalidoException("Date não pode ser null");
 		}
 	}
 }

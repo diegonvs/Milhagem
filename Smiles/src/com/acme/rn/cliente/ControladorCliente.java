@@ -5,6 +5,7 @@ import com.acme.ado.cliente.RepositorioClientes;
 import com.acme.excecoes.AtributoInvalidoException;
 import com.acme.excecoes.ObjetoExistenteException;
 import com.acme.excecoes.ObjetoNaoExistenteException;
+import com.acme.excecoes.SaldoInsuficienteException;
 import com.acme.rn.conta.ControladorContaMilhagem;
 
 public class ControladorCliente {
@@ -14,7 +15,7 @@ public class ControladorCliente {
 
 	// Métodos
 	public void Incluir(Cliente novo) throws AtributoInvalidoException,
-			ObjetoExistenteException {
+			ObjetoExistenteException, SaldoInsuficienteException {
 		novo.validar();
 		if (novo.equals(null)) {
 			throw new AtributoInvalidoException("Cliente nulo!");

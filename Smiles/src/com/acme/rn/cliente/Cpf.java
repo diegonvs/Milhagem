@@ -65,14 +65,10 @@ public class Cpf {
 	}
 
 	public static Cpf criarObjeto(Scanner s) {
-		int num, dig;
 		System.out.print("Informe o numero do CPF: ");
-		num = s.nextInt();
-		s.nextLine();
-		System.out.print("Informe o digito verificador do CPF: ");
-		dig = s.nextInt();
-		s.nextLine();
-		Cpf c = new Cpf(num, dig);
+		String cpf = s.nextLine();
+		Cpf c = new Cpf(cpf);
+		
 		return c;
 
 	}

@@ -36,8 +36,6 @@ public class RepositorioIdentificaveis implements
 			if (qtd < elementos.length && id != null) {
 				elementos[qtd++] = id;
 			} else {
-				System.out
-						.println("O repositório está cheio ou cliente é nulo! ");
 				throw new ObjetoExistenteException(
 						"O repositório está cheio ou cliente é nulo!");
 			}

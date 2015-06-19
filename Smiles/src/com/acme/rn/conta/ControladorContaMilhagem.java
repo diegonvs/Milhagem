@@ -16,7 +16,7 @@ public class ControladorContaMilhagem {
 
 	// Métodos:
 	public void Inserir(Cpf c) throws AtributoInvalidoException,
-			ObjetoExistenteException {
+			ObjetoExistenteException, SaldoInsuficienteException {
 		try {
 			rcm1.buscarpeloCpf(c.getCpf()).validar();
 		} catch (ObjetoNaoExistenteException e) {
