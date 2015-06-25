@@ -4,6 +4,7 @@ import com.acme.ado.conta.RepositorioMovimentoConta;
 import com.acme.excecoes.AtributoInvalidoException;
 import com.acme.excecoes.ObjetoExistenteException;
 import com.acme.rn.cliente.Cliente;
+import com.acme.rn.cliente.Cpf;
 import com.acme.rn.conta.ContaMilhagem;
 import com.acme.rn.conta.IdentificadorConta;
 import com.acme.rn.conta.MovimentoConta;
@@ -15,11 +16,13 @@ public class TesteRepositorioMovimentoConta {
 	public static void main(String[] args) throws ObjetoExistenteException,
 			AtributoInvalidoException {
 		// iniciando os movimentos de conta.
-		Cliente c1 = new Cliente("10879780410", "Diego Nascimento", 18, 100, 0);
+		Cpf cpf = new Cpf("10879780410");
+		Cliente c1 = new Cliente(cpf, "Diego Nascimento", 18, 100, 0);
 		IdentificadorConta ic1 = new IdentificadorConta(100);
 		ContaMilhagem cm1 = new ContaMilhagem(ic1, c1);
 
-		Cliente c2 = new Cliente("66842979447", "Teste c2", 50, 10000, 1);
+		Cpf cpf2 = new Cpf("66842979447");
+		Cliente c2 = new Cliente(cpf2, "Teste c2", 50, 10000, 1);
 		IdentificadorConta ic2 = new IdentificadorConta(200);
 		ContaMilhagem cm2 = new ContaMilhagem(ic2, c2);
 

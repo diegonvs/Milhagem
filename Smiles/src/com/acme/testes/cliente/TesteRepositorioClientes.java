@@ -7,7 +7,7 @@ import com.acme.rn.cliente.Cliente;
 public class TesteRepositorioClientes {
 
 	public static void main(String[] args) throws AtributoInvalidoException {
-		///Inicializando o repositório.////////////////////////////////////////////////////
+		/*///Inicializando o repositório.////////////////////////////////////////////////////
 		RepositorioClientes rc = new RepositorioClientes();
 		///////////////////////////////////////////////////////////////////////////////////
 		///Iniciando os clientes.//////////////////////////////////////////////////////////
@@ -33,7 +33,7 @@ public class TesteRepositorioClientes {
 		System.out.println(rc.buscarporChave("12345678910"));
 		System.out.println(rc.excluir(c4.getCpf()));///Excluindo o cliente "c4" (Nome:"Exú Caveirinha da Silva) do repositório
 		System.out.println("Segundo listar sem o cliente c4(Exú Caveirinha da Silva): ");
-		rc.buscaTodos();
+		rc.buscaTodos();*/
 	}
 	
 }

@@ -81,13 +81,15 @@ public class RepositorioIdentificaveis implements
 		}
 	}
 
-	public void listar() {
+	public Registro[] listar() {
 		System.out.println("--- Identificáveis: ---");
 		for (int i = 0; i < qtd; i++) {
 			System.out.println("Dados do cliente: " + (i + 1));
 			System.out.println(elementos[i].toString());
 		}
 		System.out.println("----------------------------");
+		
+		return elementos;
 	}
 
 }

@@ -1,5 +1,7 @@
 package com.acme.rn.cliente;
 
+import java.io.IOException;
+
 import com.acme.ado.classesGerais.InterfaceRepositorioClientes;
 import com.acme.ado.cliente.RepositorioClientes;
 import com.acme.excecoes.AtributoInvalidoException;
@@ -34,19 +36,20 @@ public class ControladorCliente {
 
 	}
 
-	public void Alterar(Cliente c) throws AtributoInvalidoException,
-			ObjetoNaoExistenteException {
-		c.validar();
-		if (c.equals(null)) {
-			throw new AtributoInvalidoException("Cliente nulo!");
-		} else {
-			try {
-				rc1.alterar(c);
-			} catch (ObjetoNaoExistenteException e) {
-				System.out.println(e.getMessage());
-			}
-
+	public void Alterar(Cliente novo, Cliente existente)
+			throws AtributoInvalidoException, ObjetoNaoExistenteException {
+		novo.validar();
+		existente.validar();
+		try {
+			rc1.alterar(novo, existente);
+		} catch (ObjetoNaoExistenteException e) {
+			System.out.println(e.getMessage());
+		} catch (ObjetoExistenteException e) {
+			System.out.println(e.getMessage());
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
 		}
+
 	}
 
 	public void Excluir(Cpf cpf) throws AtributoInvalidoException,

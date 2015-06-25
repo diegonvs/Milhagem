@@ -110,7 +110,7 @@ public class Cliente extends Registro {
 				.println("Informe o sexo do cliente[0 para Masculino,1 para Feminino]: ");
 		sexo = s.nextInt();
 		Cpf cpf = Cpf.criarObjeto(s);
-		Cliente c = new Cliente(cpf.toString(), nome, idade, renda, sexo);
+		Cliente c = new Cliente(cpf, nome, idade, renda, sexo);
 		return c;
 	}
 
@@ -118,7 +118,7 @@ public class Cliente extends Registro {
 		return this.cpf.getCpf();
 	}
 
-	// Construtor com atributo cpf do tipo inteiro
+	/*// Construtor com atributo cpf do tipo inteiro
 	public Cliente(int numero, int dig, String nome, int idade, double renda,
 			int sexo) {
 		this.cpf.setDigito(dig);
@@ -127,48 +127,36 @@ public class Cliente extends Registro {
 		this.setIdade(idade);
 		this.setRenda(renda);
 		this.setSexo(sexo);
-	}
+	}*/
 
-	// Construtor com atributo cpf do tipo string
-	public Cliente(String cpf, String nome, int idade, double renda, int sexo) {
-		try {
-			this.validar();
-		} catch (AtributoInvalidoException e1) {
-			// TODO Auto-generated catch block
-			System.out.println(e1.getMessage());
-		}
-		try {
-			this.validar();
-		} catch (AtributoInvalidoException e) {
-			System.out.println(e.getMessage());
-		}
-		this.cpf.setCpf(cpf);
-		this.setNome(nome);
-		this.setIdade(idade);
-		this.setRenda(renda);
-		this.setSexo(sexo);
-	}
+	
+	public Cliente(Cpf cpf, String nome, int idade,double renda,int sexo) {
+		  this.cpf = cpf;
+		  this.setNome(nome);
+		  this.setIdade(idade);
+		  this.setSexo(sexo);
+		  this.setRenda(renda);
+		 }
 
 	@Override
 	public void validar() throws AtributoInvalidoException {
-		// TODO Auto-generated method stub
 		if (this.cpf.equals(null)) {
 			throw new AtributoInvalidoException("Cpf não pode ser nulo!");
 		}
-		if (this.nome.equals(null) || this.nome.length() == 60
+		else if (this.nome.equals(null) || this.nome.length() == 60
 				|| this.nome.equals(" ")) {
 			throw new AtributoInvalidoException(
 					"Nome não pode ser null ou ter mais que 60 caracteres");
 		}
-		if (this.idade < 18 || this.idade > 200) {
+		else if (this.idade < 18 || this.idade > 200) {
 			throw new AtributoInvalidoException(
 					"Idade não pode ser menor que 18 ou maior que 200");
 		}
-		if (this.renda < 0 || this.renda > 1000000) {
+		else if (this.renda < 0 || this.renda > 1000000) {
 			throw new AtributoInvalidoException(
 					"Renda não pode ser negativa ou maior que um milhão.");
 		}
-		if (!(this.sexo == 1 || this.sexo == 0)) {
+		else if (!(this.sexo == 1 || this.sexo == 0)) {
 			throw new AtributoInvalidoException(
 					"Sexo só pode ter valor de 0[Masculino] e 1[Feminino]");
 		}

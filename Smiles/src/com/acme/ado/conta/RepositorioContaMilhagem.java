@@ -79,25 +79,26 @@ public class RepositorioContaMilhagem extends RepositorioIdentificaveis
 		}
 	}
 
-	public boolean excluir(ContaMilhagem cm) throws AtributoInvalidoException,
+	public void excluir(ContaMilhagem cm) throws AtributoInvalidoException,
 			ObjetoNaoExistenteException {
 		if (cm.equals(null)) {
 			throw new AtributoInvalidoException("ContaMilhagem null!");
 		}
 		if (ri.excluir(cm.toString())) {
-			return true;
 		} else {
 			throw new ObjetoNaoExistenteException("Objeto não encontrado!");
 		}
 	}
 
-	public void listar() {
-		System.out.println("-- Contas Milhagem Existentes: --");
+	public ContaMilhagem[] listar(){
+		return (ContaMilhagem[]) ri.listar();
+		/*System.out.println("-- Contas Milhagem Existentes: --");
 		for (int i = 0; i < ri.qtd; i++) {
 			System.out.println("Dados: " + (i + 1));
 			System.out.println(elementos[i]);
 		}
 		System.out.println("---------------------------------");
+	*/
 	}
 
 }

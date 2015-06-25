@@ -1,8 +1,11 @@
 package com.acme.ado.cliente;
 
+import java.io.IOException;
+
 import com.acme.ado.classesGerais.InterfaceRepositorioClientes;
 import com.acme.ado.classesGerais.RepositorioIdentificaveis;
 import com.acme.excecoes.AtributoInvalidoException;
+import com.acme.excecoes.ObjetoExistenteException;
 import com.acme.excecoes.ObjetoNaoExistenteException;
 import com.acme.rn.cliente.Cliente;
 import com.acme.rn.cliente.Cpf;
@@ -34,7 +37,7 @@ public class RepositorioClientes implements InterfaceRepositorioClientes {
 	}
 
 	public void incluir(Cliente c) throws AtributoInvalidoException {
-		if(c.equals(null)){
+		if (c.equals(null)) {
 			throw new AtributoInvalidoException("Cliente nulo!");
 		}
 		if (ri.qtd < this.ri.elementos.length) {
@@ -62,8 +65,17 @@ public class RepositorioClientes implements InterfaceRepositorioClientes {
 		}
 	}
 
-	public boolean excluir(Cpf cpf) throws AtributoInvalidoException {
-		boolean r = false;
+	public Cliente[] buscaTodos() {
+		Cliente[] clientes = new Cliente[ri.qtd];
+		for (int i = 0; i < ri.qtd; i++) {
+			clientes[i] = (Cliente) ri.elementos[i];
+		}
+		return clientes;
+	}
+
+	@Override
+	public void excluir(Cpf cpf) throws AtributoInvalidoException,
+			ObjetoNaoExistenteException {
 		if (cpf.equals(null)) {
 			throw new AtributoInvalidoException("Cpf nulo!");
 		} else {
@@ -73,19 +85,17 @@ public class RepositorioClientes implements InterfaceRepositorioClientes {
 					ri.elementos[i] = null;
 					ri.elementos[i] = ri.elementos[ri.qtd--];
 					ri.elementos[ri.qtd] = null;
-					r = true;
 					break;
 				}
 			}
-			return r;
 		}
 	}
 
-	public Cliente[] buscaTodos() {
-		Cliente[] clientes = new Cliente[ri.qtd];
-		for (int i = 0; i < ri.qtd; i++) {
-			clientes[i] = (Cliente) ri.elementos[i];
-		}
-		return clientes;
+	@Override
+	public void alterar(Cliente novo, Cliente existente)
+			throws AtributoInvalidoException, ObjetoNaoExistenteException,
+			ObjetoExistenteException, IOException {
+		// TODO Auto-generated method stub
+
 	}
 }

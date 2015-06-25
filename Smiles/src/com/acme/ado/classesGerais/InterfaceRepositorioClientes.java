@@ -1,5 +1,7 @@
 package com.acme.ado.classesGerais;
 
+import java.io.IOException;
+
 import com.acme.excecoes.AtributoInvalidoException;
 import com.acme.excecoes.ObjetoExistenteException;
 import com.acme.excecoes.ObjetoNaoExistenteException;
@@ -13,9 +15,12 @@ public interface InterfaceRepositorioClientes {
 	public void incluir(Cliente c) throws AtributoInvalidoException,
 			ObjetoExistenteException;
 
-	public void alterar(Cliente cliente) throws AtributoInvalidoException,ObjetoNaoExistenteException;
-
-	public boolean excluir(Cpf cpf) throws AtributoInvalidoException,ObjetoNaoExistenteException;
+	public void excluir(Cpf cpf) throws AtributoInvalidoException,
+			ObjetoNaoExistenteException;
 
 	public Cliente[] buscaTodos();
+
+	public void alterar(Cliente novo, Cliente existente)
+			throws AtributoInvalidoException, ObjetoNaoExistenteException, ObjetoExistenteException, IOException;
+
 }

@@ -20,9 +20,9 @@ public interface InterfaceRepositorioContaMilhagem {
 	public void alterar(IdentificadorConta existente, ContaMilhagem cm)
 			throws AtributoInvalidoException, ObjetoNaoExistenteException;
 
-	public boolean excluir(ContaMilhagem cm) throws AtributoInvalidoException,
+	public void excluir(ContaMilhagem cm) throws AtributoInvalidoException,
 			ObjetoNaoExistenteException;
 
-	public void listar() throws AtributoInvalidoException;
+	public ContaMilhagem[] listar() throws AtributoInvalidoException;
 
 }

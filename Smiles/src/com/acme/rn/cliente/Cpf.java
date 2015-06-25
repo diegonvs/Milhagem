@@ -49,14 +49,15 @@ public class Cpf {
 	}
 
 	public String getCpf() {
+		return this.cpf;
+		
+	}
+
+	public String getCpfInterger() {
 		String n1 = Integer.toString(this.numero);
 		String n2 = Integer.toString(this.digito);
 		String resultado = n1 + n2;
 		return resultado;
-	}
-
-	public String getCpfString() {
-		return this.cpf;
 	}
 
 	// Métodos
